@@ -1,9 +1,9 @@
-import 'package:liga_bps/adomain/entities/atletas.dart';
-import 'package:liga_bps/adomain/entities/time.dart';
+import 'package:liga_bps/adomain/entities/player.dart';
+import 'package:liga_bps/adomain/entities/team.dart';
 
 class Cartola {
-final List<Atletas> atletas;
-final Time time;
+final List<Player> player;
+final Team team;
 final double pontosCampeonato;
 final int capitaoId;
 final double pontos;
@@ -11,8 +11,8 @@ final int rodadaAtual;
 final double patrimonio;
 
   Cartola({
-    required this.atletas,
-    required this.time,
+    required this.player,
+    required this.team,
     required this.pontosCampeonato,
     required this.capitaoId,
     required this.pontos,

@@ -1,4 +1,4 @@
-class Atletas {
+class Player {
   final int atletaId;
   final int rodadaId;
   final int clubeId;
@@ -7,7 +7,7 @@ class Atletas {
   final String apelidoAbreviado;
   final String nome;
 
-  Atletas({
+  Player({
     required this.atletaId,
     required this.rodadaId,
     required this.clubeId,

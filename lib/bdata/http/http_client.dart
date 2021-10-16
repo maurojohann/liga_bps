@@ -1,7 +1,7 @@
-import 'package:liga_bps/adomain/entities/cartola.dart';
-
 abstract class HttpClient {
-  Future<Cartola> request({
-    String url
+  Future<String> request({
+    required String url,
+    required String method,
+    Map? body,
   });
 }

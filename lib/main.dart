@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:liga_bps/bdata/http/http_client.dart';
+import 'package:liga_bps/bdata/models/remote_cartola_model.dart';
+import 'package:liga_bps/bdata/usecases/remote_request_cartola.dart';
+import 'package:liga_bps/cinfra/http/http_adapter.dart';
+import 'package:http/http.dart';
+
+import 'adomain/entities/cartola.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,16 +22,45 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  List<Cartola> cartolas = [];
+
+  @override
+  void initState() {
+    final Client client = Client();
+    final HttpClient httpClient = HttpAdapter(client);
+
+    final RemoteRequestCartola remoteRequests = RemoteRequestCartola(
+        url: 'https://api.cartolafc.globo.com/time/id/',
+        httpClient: httpClient);
+
+    requestCartola(remoteRequests);
+
+    super.initState();
+  }
+
+  Future<List<Cartola>> requestCartola(
+      RemoteRequestCartola remoteRequests) async {
+    cartolas = await remoteRequests.requestCartola(['26050244']);
+    return cartolas;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Text(cartolas[0].team.nome),
+    );
   }
 }
