@@ -54,13 +54,17 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<List<Cartola>> requestCartola(
       RemoteRequestCartola remoteRequests) async {
     cartolas = await remoteRequests.requestCartola(['26050244']);
+    setState(() {
+      cartolas;
+    });
+
     return cartolas;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text(cartolas[0].team.nome),
+      child: Text(cartolas.isEmpty ? '' : cartolas[0].team.nome),
     );
   }
 }
